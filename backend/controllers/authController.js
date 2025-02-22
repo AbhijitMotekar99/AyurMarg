@@ -12,18 +12,19 @@ const registerUser = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      console.log("email already there!!!");
+      console.log("Email already exists:", email);
       return res.status(400).json({ message: "Email already in use" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name, email, password: hashedPassword, gender, age, lifestyle });
 
-    console.log(newUser);
+    console.log("New user created:", newUser);
 
     await newUser.save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
+    console.error("Register error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
@@ -31,27 +32,30 @@ const registerUser = async (req, res) => {
 // Login User Function
 const loginUser = async (req, res) => {
   try {
+    console.log("Login request received");
 
-    console.log(5510);
     const { email, password } = req.body;
-
     const user = await User.findOne({ email });
+
     if (!user) {
-      console.log(441045)
+      console.log("User not found:", email);
       return res.status(400).json({ message: "Invalid email or password" });
     }
+
+    console.log("User found:", user.email);
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log("Password validation result:", isPasswordValid);
+
     if (!isPasswordValid) {
-      console.log(4410)
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    console.log("successfull");
+    console.log("Login successful for:", user.email);
 
     res.json({
       message: "Login successful",
-      token: generateToken(user._id),
+      token: generateToken(user._id,user.email,user.name),
       user: {
         id: user._id,
         name: user.name,
@@ -59,6 +63,7 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
+    console.error("Login error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };

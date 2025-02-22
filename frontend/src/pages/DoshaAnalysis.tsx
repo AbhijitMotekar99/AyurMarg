@@ -1,7 +1,7 @@
 // DoshaAnalysis.tsx
 import React from 'react';
-import { QuestionnaireForm } from 'C:/Users/Mohit/Downloads/AyurMarg UI Version_1/project/frontend/src/components/dosha/QuestionnaireForm.tsx';
-import { ResultsPage } from 'C:/Users/Mohit/Downloads/AyurMarg UI Version_1/project/frontend/src/components/dosha/ResultsPage.tsx';
+import { QuestionnaireForm } from '../components/dosha/QuestionnaireForm';
+import { ResultsPage } from '../components/dosha/ResultsPage';
 import type { DoshaResult } from '../types/dosha';
 
 // import React from 'react';
