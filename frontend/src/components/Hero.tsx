@@ -29,7 +29,9 @@ export function Hero() {
             Start My Dosha Analysis
             <ArrowRight className="ml-2 h-5 w-5" />
           </button>
-          <button className="bg-[#D4A373] text-white px-8 py-3 rounded-full hover:bg-[#BC8F66] transition-all transform hover:scale-105 shadow-lg flex items-center">
+          <button 
+            onClick={() => navigate('/chatbot')}
+            className="bg-[#D4A373] text-white px-8 py-3 rounded-full hover:bg-[#BC8F66] transition-all transform hover:scale-105 shadow-lg flex items-center">
             Chat with AyurBot
             <MessageCircle className="ml-2 h-5 w-5" />
           </button>

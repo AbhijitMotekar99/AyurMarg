@@ -18,6 +18,7 @@ export function Navbar() {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-[#5A7184] hover:text-[#4F7942]">Home</Link>
+            <Link to="/chatbot" className="text-[#5A7184] hover:text-[#4F7942]">ChatBot</Link>
             <Link to="/dosha-analysis" className="text-[#5A7184] hover:text-[#4F7942]">Dosha Analysis</Link>
             <Link to="/blogs" className="text-[#5A7184] hover:text-[#4F7942]">Blogs</Link>
             <Link to="/ayurvedic-search" className="text-[#5A7184] hover:text-[#4F7942]">Ayurvedic Search</Link>

@@ -10,6 +10,7 @@ import { DoshaAnalysis } from './pages/DoshaAnalysis';
 import { Blogs } from './pages/Blogs';
 import { AyurvedicSearch } from './pages/AyurvedicSearch';
 import { Dashboard } from './pages/Dashboard';
+import { ChatBot } from './pages/ChatBot'
 
 // Import the Home page components
 import { Hero } from './components/Hero';
@@ -34,6 +35,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/chatbot" element={<ChatBot />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route

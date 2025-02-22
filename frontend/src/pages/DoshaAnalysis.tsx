@@ -20,6 +20,7 @@ function determineConstitution(vata: number, pitta: number, kapha: number): stri
 
   if (Math.abs(scores[0].score - scores[1].score) <= 5) {
     return `${scores[0].type}-${scores[1].type}`;
+
   }
 
   return scores[0].type;
@@ -56,6 +57,7 @@ export function DoshaAnalysis() {
   const { user } = useAuth();
 
   const savePrakritiToDatabase = async (doshaResult: DoshaResult) => {
+    console.log("saving prakriti to backend");
     if (!user) {
       setError("You must be logged in to save results");
       return;
@@ -73,14 +75,15 @@ export function DoshaAnalysis() {
         recommendations: doshaResult.recommendations
       };
 
-      console.log(prakritiData);
+      console.log(prakritiData,user);
 
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/prakriti/${user._id}`,
+        `http://localhost:5000/api/prakriti/${user.id}`,
         prakritiData,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('userToken')}`
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+
           }
         }
       );
@@ -110,8 +113,11 @@ export function DoshaAnalysis() {
       constitution: determineConstitution(scores.vata, scores.pitta, scores.kapha),
       recommendations: getRecommendations(determineConstitution(scores.vata, scores.pitta, scores.kapha))
     };
+
+    console.log(3232);
     
     await savePrakritiToDatabase(doshaResult);
+    
     setResult(doshaResult);
     setShowResults(true);
   };

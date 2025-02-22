@@ -69,6 +69,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signup = async (userData: SignupData) => {
     try {
       const response = await axios.post('http://localhost:5000/api/auth/signup', userData);
+
+      localStorage.setItem("token",response.data.token);
       
       // After successful signup, log the user in
       await login(userData.email, userData.password);
